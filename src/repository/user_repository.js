@@ -1,4 +1,5 @@
 const { User } = require('../models/index');
+const { response } = require('express');
 
 class UserRepository {
 
