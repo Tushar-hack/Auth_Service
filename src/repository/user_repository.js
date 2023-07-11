@@ -1,5 +1,4 @@
 const { User } = require('../models/index');
-const { response } = require('express');
 
 class UserRepository {
 
@@ -21,6 +20,20 @@ class UserRepository {
                 }
             });
             return true;
+        } catch (error) {
+            console.log("Something Went wrong on repository Layer");
+            throw error;
+        }
+    }
+
+    async getByEmail (userEmail) {
+        try {
+            const user = await User.findOne({
+                where: {
+                    email: userEmail
+                }
+            });
+            return user;
         } catch (error) {
             console.log("Something Went wrong on repository Layer");
             throw error;
