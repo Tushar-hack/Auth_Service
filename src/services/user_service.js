@@ -73,6 +73,25 @@ class UserService {
             throw error;
         }
     }
+
+    async isAuthenticated (token) {
+        try {
+            const isTokenVerified = this.verifyToken(token); // {email: '', id: 3, iat: ;}
+            if(!isTokenVerified) {
+                throw {error: 'Invalid Token'};
+            }
+            const user = await this.UserRepository.getById(isTokenVerified.id);
+            if(!user) {
+                throw {
+                    error: 'No user exist with corresponding Token'
+                }
+            }
+            return user.id;
+        } catch (error) {
+            console.log("Something Went wrong on repository Layer");
+            throw error;
+        }
+    }
 }
 
 module.exports = UserService;
