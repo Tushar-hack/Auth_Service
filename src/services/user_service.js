@@ -26,7 +26,7 @@ class UserService {
             });
             return result;
         } catch (error) {
-            console.log("Something Went wrong on repository Layer");
+            console.log("Something Went wrong on Service Layer");
             throw error;
         }
     }
@@ -36,7 +36,7 @@ class UserService {
             const response = jwt.verify(token, JWT_KEY);
             return response;
         } catch (error) {
-            console.log("Something Went wrong on repository Layer");
+            console.log("Something Went wrong on Service Layer");
             throw error;
         }   
     }
@@ -45,7 +45,7 @@ class UserService {
         try {
             return bcrypt.compareSync(userInputPlainPassword, encryptedPassword);
         } catch (error) {
-            console.log("Something Went wrong on repository Layer");
+            console.log("Something Went wrong on Service Layer");
             throw error;
         }
     }
@@ -69,7 +69,7 @@ class UserService {
             });
             return newJWT;
         } catch (error) {
-            console.log("Something Went wrong on repository Layer");
+            console.log("Something Went wrong on Service Layer");
             throw error;
         }
     }
@@ -88,7 +88,16 @@ class UserService {
             }
             return user.id;
         } catch (error) {
-            console.log("Something Went wrong on repository Layer");
+            console.log("Something Went wrong on Service Layer");
+            throw error;
+        }
+    }
+
+    isAdmin (userId) {
+        try {
+            return this.UserRepository.isAdmin(userId);
+        } catch (error) {
+            console.log("Something Went wrong on Service Layer");
             throw error;
         }
     }
